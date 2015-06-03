@@ -1,0 +1,3 @@
+grant codeBase "file:/home/ec2012/ra135801/Downloads/mc833/RMI/Tutorial" {
+    permission java.security.AllPermission;
+};
