@@ -2,9 +2,8 @@ package main;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.List;
 import rmi.MovieDatabase;
-import rmi.QueryResult;
+import test.TestTool;
 
 public class Main {
 	
@@ -14,9 +13,8 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			Registry myRegistry = LocateRegistry.getRegistry(SERVER_IP);             
-			MovieDatabase impl = (MovieDatabase) myRegistry.lookup(SERVICE_NAME);						
-			 QueryResult result = impl.executeUpdateQuery("UPDATE Movies SET Genero = 'opa2' where Genero = 'opaa'");
-			 System.out.println(result.serverProcessingTime);
+			MovieDatabase movieDatabase = (MovieDatabase) myRegistry.lookup(SERVICE_NAME);						
+			TestTool.start(movieDatabase, 50);
 		} catch (Exception e) {
 			System.err.println(e);
 			System.exit(1);

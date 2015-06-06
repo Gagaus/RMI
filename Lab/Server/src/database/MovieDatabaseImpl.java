@@ -27,7 +27,7 @@ public class MovieDatabaseImpl extends UnicastRemoteObject implements MovieDatab
 	@Override
 	public QueryResult executeUpdateQuery(String query) throws RemoteException, SQLException {
 		long t0 = System.nanoTime();
-		printClientInfo(query, "Update");
+//		printClientInfo(query, "Update");
 		QueryResult result = new QueryResult();
 		statement.executeUpdate(query);
 		result.data = null;		
@@ -38,7 +38,7 @@ public class MovieDatabaseImpl extends UnicastRemoteObject implements MovieDatab
 	@Override
 	public QueryResult executeSearchQuery(String query) throws RemoteException, SQLException {
 		long t0 = System.nanoTime();
-		printClientInfo(query, "Search");
+//		printClientInfo(query, "Search");
 		QueryResult result = new QueryResult();
 		result.data = getSearchQueryResult(query);
 		result.serverProcessingTime = (float)(System.nanoTime() - t0)/1000000.0f;
