@@ -16,9 +16,11 @@ public class MovieDatabaseImpl extends UnicastRemoteObject implements MovieDatab
 	public MovieDatabaseImpl() throws RemoteException {
 		super();
 		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:movies.db");			
+			//cria conexao com o banco SQLite
+			connection = DriverManager.getConnection("jdbc:sqlite:movies.db");
 			statement = connection.createStatement();
 		} catch (Exception e) {
+			//em caso de erro, imprime o mesmo e encerra execucao
 			System.err.println(e);
 			System.exit(1);
 		}
@@ -30,7 +32,9 @@ public class MovieDatabaseImpl extends UnicastRemoteObject implements MovieDatab
 //		printClientInfo(query, "Update");
 		QueryResult result = new QueryResult();
 		statement.executeUpdate(query);
-		result.data = null;		
+		//query do tipo update nao possui retorno de dados
+		result.data = null;
+		//captura tempo transcorrido desde a solicitacao de execucao ao banco
 		result.serverProcessingTime = (float)(System.nanoTime() - t0)/1000000.0f;
 		return result;
 	}
@@ -40,11 +44,13 @@ public class MovieDatabaseImpl extends UnicastRemoteObject implements MovieDatab
 		long t0 = System.nanoTime();
 //		printClientInfo(query, "Search");
 		QueryResult result = new QueryResult();
+		//matriz contendo os dados retornados pelo banco
 		result.data = getSearchQueryResult(query);
+		//captura tempo transcorrido desde a solicitacao de execucao ao banco		
 		result.serverProcessingTime = (float)(System.nanoTime() - t0)/1000000.0f;
 		return result;
 	}
-	
+	//metodo auxiliar para imprimir na tela informacoes do cliente solicitante
 	private void printClientInfo(String query, String requestType) {
 		try {
 			System.out.println("\n" + requestType + " Request: " + query);
@@ -52,6 +58,7 @@ public class MovieDatabaseImpl extends UnicastRemoteObject implements MovieDatab
 		} catch (Exception e) {}	
 	}
 	
+	//metodo responsavel por criar matriz com o resultado da pesquisa realidada no banco
 	private List<List<String>> getSearchQueryResult(String query) throws SQLException {
 		List<List<String>> ans;
 		try (ResultSet resultSet = statement.executeQuery(query)) {
