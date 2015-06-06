@@ -14,8 +14,8 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			Registry myRegistry = LocateRegistry.getRegistry(SERVER_IP);             
-			MovieDatabase impl = (MovieDatabase) myRegistry.lookup(SERVICE_NAME);
-			 QueryResult result = impl.executeSearchQuery("SELECT Genero FROM Movies");
+			MovieDatabase impl = (MovieDatabase) myRegistry.lookup(SERVICE_NAME);						
+			 QueryResult result = impl.executeUpdateQuery("UPDATE Movies SET Genero = 'opa2' where Genero = 'opaa'");
 			 System.out.println(result.serverProcessingTime);
 		} catch (Exception e) {
 			System.err.println(e);

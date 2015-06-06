@@ -17,7 +17,6 @@ public class MovieDatabaseImpl extends UnicastRemoteObject implements MovieDatab
 		super();
 		try {
 			connection = DriverManager.getConnection("jdbc:sqlite:movies.db");
-			connection.setAutoCommit(false);
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -27,17 +26,30 @@ public class MovieDatabaseImpl extends UnicastRemoteObject implements MovieDatab
 
 	@Override
 	public QueryResult executeUpdateQuery(String query) throws RemoteException, SQLException {
+		long t0 = System.nanoTime();
+		printClientInfo(query, "Update");
 		QueryResult result = new QueryResult();
-		result.data = null;
+		statement.executeUpdate(query);
+		result.data = null;		
+		result.serverProcessingTime = (float)(System.nanoTime() - t0)/1000000.0f;
 		return result;
 	}
 
 	@Override
 	public QueryResult executeSearchQuery(String query) throws RemoteException, SQLException {
+		long t0 = System.nanoTime();
+		printClientInfo(query, "Search");
 		QueryResult result = new QueryResult();
 		result.data = getSearchQueryResult(query);
-		result.serverProcessingTime = 2.0f;
+		result.serverProcessingTime = (float)(System.nanoTime() - t0)/1000000.0f;
 		return result;
+	}
+	
+	private void printClientInfo(String query, String requestType) {
+		try {
+			System.out.println("\n" + requestType + " Request: " + query);
+			System.out.println("From          : " + getClientHost());
+		} catch (Exception e) {}	
 	}
 	
 	private List<List<String>> getSearchQueryResult(String query) throws SQLException {
