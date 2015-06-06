@@ -16,7 +16,7 @@ public class MovieDatabaseImpl extends UnicastRemoteObject implements MovieDatab
 	public MovieDatabaseImpl() throws RemoteException {
 		super();
 		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:movies.db");
+			connection = DriverManager.getConnection("jdbc:sqlite:movies.db");			
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			System.err.println(e);
