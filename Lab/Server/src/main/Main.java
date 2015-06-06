@@ -11,7 +11,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		if(args.length != 1) {
-			System.out.println("usage main.Main serverPort");
+			System.out.println("usage java -jar " +  '"' + "Server.jar" + '"' + "serverPort");
 			System.exit(1);
 		}
 		int serverPort = Integer.parseInt(args[0]);
@@ -23,7 +23,7 @@ public class Main {
 			//instrucoes auxiliares para exibicao das informacoes do servidor
 			InetAddress serverAddr = InetAddress.getLocalHost();
 			System.out.println("Server name   : " + serverAddr.getHostName());
-			System.out.println("Running on    : " + serverAddr.getHostAddress());
+			System.out.println("Running on    : " + serverAddr.getHostAddress() + " (" + serverPort + ")");
 		} catch (Exception e) {
 			//em caso de erro, imprime o mesmo e encerra execucao
 			System.err.println(e);
