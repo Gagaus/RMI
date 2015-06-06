@@ -8,3 +8,8 @@
 ehthumbs.db
 Thumbs.db
 /Lab/nbproject/private/
+/Lab/Server/nbproject/private/
+/Lab/Client/nbproject/private/
+/Lab/Server/build/
+/Lab/Server/dist/
+/Lab/Client/build/
