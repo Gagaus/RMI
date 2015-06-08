@@ -11,7 +11,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		if(args.length != 1) {
-			System.out.println("usage java -jar " +  '"' + "Server.jar" + '"' + "serverPort");
+			System.out.println("usage java -jar " +  '"' + " Server.jar" + '"' + "serverPort");
 			System.exit(1);
 		}
 		int serverPort = Integer.parseInt(args[0]);
