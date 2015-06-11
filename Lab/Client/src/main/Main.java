@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		if(args.length != 3) {
-			System.out.println("usage java -jar " +  '"' + " Client.jar" + '"' + "serverIP serverPort testsPerType");	
+			System.out.println("usage java -jar " +  '"' + "Client.jar" + '"' + " serverIP serverPort testsPerType");	
 			System.exit(1);
 		}
 		String serverIP = args[0];
